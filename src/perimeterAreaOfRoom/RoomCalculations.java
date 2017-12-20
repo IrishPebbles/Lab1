@@ -4,38 +4,39 @@ import java.util.Scanner;
 
 public class RoomCalculations {
 	public static void main(String[] args) {
-		Scanner scnr = new Scanner(System.in);
+		Scanner sc = new Scanner(System.in);
 
 		double length = 0;
 		double width = 0;
 		double height = 0;
 
-		char userData = '-';
-
-		System.out.println("Welcome to Grand Circus' Room Detail Generator!");
-		System.out.println();
+		System.out.println("Welcome to the Room Detail Generator!");
 
 		do {
-			System.out.print("Enter Length: ");
-			length = scnr.nextDouble();
-
-			System.out.print("Enter Width: ");
-			width = scnr.nextDouble();
-
-			System.out.println("Area: " + (width * length));
-			System.out.println("Perimeter: " + ((2 * width) + (2 * length)));
-			System.out.println("Volume: " + (width * length * height));
+			
+			length = Validator.getDouble(sc, "Enter Length: ");
+			width = Validator.getDouble(sc, "Enter Width: ");
+			height = Validator.getDouble(sc, "Enter Height: ");
+			
+			System.out.println("\nYour room measurements are: ");
+			System.out.println(area(length, width));
+			System.out.println(perimeter(length, width));
+			System.out.println(volume(length, width, height));
 			System.out.println();
 
-			do {
-				System.out.print("Continue? (y/n): ");
-				userData = scnr.next().charAt(0);
-				System.out.println();
-			} while (userData != 'n' && userData != 'N' && userData != 'y' && userData != 'Y');
+		} while (Validator.getYorN(sc, "Continue? (y/n): "));
 
-		} while (userData != 'n' && userData != 'N');
-
-		scnr.close();
+		sc.close();
 	}
+	
+	private static String area(double length, double width) {
+		return "Area: " + (length * width);
+		}
+	private static String perimeter(double length, double width) {
+		return "Perimeter: " + ((2 * width) + (2 * length));
+		}
+	private static String volume(double length, double width, double height) {
+		return "Volume: " + (width * length * height);
+		}
 
 }
